@@ -1,4 +1,4 @@
-import { INTEGER, Model, STRING } from 'sequelize/types';
+import { INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
 
 export default class Users extends Model {

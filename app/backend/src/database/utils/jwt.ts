@@ -17,6 +17,7 @@ export default class {
 
   public decode = (token: string): JwtPayload => {
     const decoded = jwt.verify(token, this._secret);
+
     return decoded as JwtPayload;
   };
 }

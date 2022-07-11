@@ -1,9 +1,9 @@
-import * as express from 'express';
+import { Router } from 'express';
 import UserController from '../controllers/userController';
 import validateLogin from '../middlewares/validateLogin';
 import UserService from '../services/userService';
 
-const router = express.Router();
+const router = Router();
 
 const user = new UserController(new UserService());
 
