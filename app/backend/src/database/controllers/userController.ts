@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import UserService from '../services/userService';
+import Jwt from '../utils/jwt';
 
 export default class UserController {
   private _service = new UserService();
+  private _jwt = new Jwt();
 
   constructor(service: UserService) {
     this._service = service;
@@ -12,7 +14,18 @@ export default class UserController {
     const { password, email } = req.body;
     try {
       const user = await this._service.login(password, email);
-      return res.status(200).json({ user });
+      const token = this._jwt.encode(user);
+      return res.status(200).json({ token });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public loginValidate = async (req: Request, res: Response, next: NextFunction) => {
+    const { authorization } = req.headers;
+    try {
+      const { data } = this._jwt.decode(authorization as string);
+      res.status(200).json({ role: data.role });
     } catch (error) {
       next(error);
     }
