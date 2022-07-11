@@ -14,8 +14,6 @@ export default class UserController {
     const { password, email } = req.body;
     try {
       const token = await this._service.login(password, email);
-      console.log(token);
-
       return res.status(200).json({ token });
     } catch (error) {
       next(error);
