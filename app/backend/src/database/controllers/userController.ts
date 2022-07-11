@@ -13,8 +13,9 @@ export default class UserController {
   public login = async (req: Request, res: Response, next: NextFunction) => {
     const { password, email } = req.body;
     try {
-      const user = await this._service.login(password, email);
-      const token = this._jwt.encode(user);
+      const token = await this._service.login(password, email);
+      console.log(token);
+
       return res.status(200).json({ token });
     } catch (error) {
       next(error);

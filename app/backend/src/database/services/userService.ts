@@ -1,8 +1,11 @@
 import * as bcrypt from 'bcryptjs';
 import Users from '../models/users';
 import generateError from '../utils/generateError';
+import Jwt from '../utils/jwt';
 
 export default class UserService {
+  private _jwt = new Jwt();
+
   public login = async (password: string, email: string) => {
     const user = await Users.findOne({ where: { email } });
 
@@ -12,6 +15,10 @@ export default class UserService {
 
     if (!isPassword) throw generateError(401, 'Incorrect email or password');
 
-    return user;
+    const { id, username, role } = user;
+
+    const token = this._jwt.encode({ id, username, email, role });
+
+    return token;
   };
 }
