@@ -1,7 +1,7 @@
 import Teams from '../models/TeamModel';
 // import generateError from '../utils/generateError';
 
-export default class TeamsService {
+export default class TeamService {
   public getAll = async () => {
     const teams = await Teams.findAll();
     return teams;
