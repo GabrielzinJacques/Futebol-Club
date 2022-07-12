@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcryptjs';
-import Users from '../models/users';
+import Users from '../models/UserModel';
 import generateError from '../utils/generateError';
 import Jwt from '../utils/jwt';
 
