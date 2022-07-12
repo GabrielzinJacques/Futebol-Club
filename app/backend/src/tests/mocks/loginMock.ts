@@ -1,5 +1,7 @@
 import User from '../../database/models/UserModel'
 
+export const fakeToken = '1fr35yb52ch'
+
 export const mockUser = {
   id: 1,
   username: 'Admin',
