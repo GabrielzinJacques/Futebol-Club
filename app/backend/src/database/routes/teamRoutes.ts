@@ -8,6 +8,6 @@ const team = new TeamController(new TeamsService());
 
 router.get('/teams', team.getAll);
 
-router.get('/teams:id', team.getById);
+router.get('/teams/:id', team.getById);
 
 export default router;
