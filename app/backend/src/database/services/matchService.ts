@@ -39,7 +39,11 @@ export default class MatchService {
 
     if (!isMatch) throw generateError(404, 'There is no team with such id!');
 
-    const response = await Match.create(match);
+    const newMatch = {
+      ...match, inProgress: true,
+    };
+
+    const response = await Match.create(newMatch);
     return response;
   };
 }
