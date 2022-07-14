@@ -25,6 +25,10 @@ export default class MatchService {
     return response;
   };
 
+  public finished = async (id: number) => {
+    await Match.update({ inProgress: 0 }, { where: { id } });
+  };
+
   public create = async (match: IMatch) => {
     if (match.awayTeam === match.homeTeam) {
       throw generateError(401, 'It is not possible to create a match with two equal teams');

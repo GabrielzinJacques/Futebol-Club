@@ -18,6 +18,16 @@ export default class MatchController {
     }
   };
 
+  public finished = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+      await this._service.finished(Number(id));
+      return res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public create = async (req: Request, res: Response, next: NextFunction) => {
     const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
     try {
