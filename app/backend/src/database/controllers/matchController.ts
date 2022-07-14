@@ -17,4 +17,15 @@ export default class MatchController {
       next(error);
     }
   };
+
+  public create = async (req: Request, res: Response, next: NextFunction) => {
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
+    try {
+      const newMatch = await this._service
+        .create({ homeTeam, awayTeam, homeTeamGoals, awayTeamGoals });
+      return res.status(201).json(newMatch);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
