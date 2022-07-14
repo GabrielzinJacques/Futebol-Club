@@ -34,10 +34,9 @@ export default class MatchService {
       throw generateError(401, 'It is not possible to create a match with two equal teams');
     }
 
-    const [isMatch] = await Match.findAll({ where: { id: [match.awayTeam, match.homeTeam] } });
-    console.log('matchh:', isMatch);
+    const isMatch = await Match.findAll({ where: { id: [match.awayTeam, match.homeTeam] } });
 
-    if (!isMatch) throw generateError(404, 'There is no team with such id!');
+    if (!isMatch[1]) throw generateError(404, 'There is no team with such id!');
 
     const newMatch = {
       ...match, inProgress: true,
