@@ -15,7 +15,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 
     next();
   } catch (error) {
-    res.status(401).json({ message: messageErr });
+    next(generateError(401, messageErr));
   }
 };
 
