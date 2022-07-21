@@ -3,6 +3,8 @@ import Match from '../models/MatchModel';
 import Team from '../models/TeamModel';
 import generateError from '../utils/generateError';
 
+type Goals = Omit<IMatch, 'homeTeam' | 'awayTeam'>;
+
 export default class MatchService {
   // https://stackoverflow.com/questions/42661141/findall-include-more-tables-on-sequelize-query
 
@@ -44,5 +46,9 @@ export default class MatchService {
 
     const response = await Match.create(newMatch);
     return response;
+  };
+
+  public editResultMatch = async (id: number, result: Goals) => {
+    await Match.update(result, { where: { id } });
   };
 }
