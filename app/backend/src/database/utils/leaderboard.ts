@@ -52,8 +52,8 @@ const getPoints = (matches: IMatch[], home: boolean): allPoints => {
   };
 };
 
-const newLeaderboard = (matches: ITeamMatches[], home: boolean) => {
-  matches.map((team: ITeamMatches) => {
+const newLeaderboard = (matches: ITeamMatches[], home: boolean): ILeaderboard[] => matches
+  .map((team: ITeamMatches) => {
     const points = getPoints(team.awayMatches || team.homeMatches, home);
 
     return {
@@ -63,6 +63,5 @@ const newLeaderboard = (matches: ITeamMatches[], home: boolean) => {
       efficiency: Number(((points.totalPoints / (points.totalGames * 3)) * 100).toFixed(2)),
     };
   });
-};
 
 export default newLeaderboard;

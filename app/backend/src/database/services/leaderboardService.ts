@@ -2,17 +2,16 @@ import Teams from '../models/TeamModel';
 import Matches from '../models/MatchModel';
 import { ITeamMatches } from '../interfaces/team';
 import newLeaderboard from '../utils/leaderboard';
+import orderLeaderboards from '../utils/orderLeaderBoard';
 
 export default class LeaderboardService {
   public getAll = async () => {
-    const matches = await Teams.findAll({
+    const response = await Teams.findAll({
       include: { model: Matches, as: 'homeMatches', where: { inProgress: false } },
     }) as unknown as ITeamMatches[];
 
-    const leaderboards = newLeaderboard(matches, true);
+    const leaderboards = newLeaderboard(response, true);
 
-    return this.sortLeaderboards(leaderboards);
+    return orderLeaderboards(leaderboards);
   };
-
-  
 }
