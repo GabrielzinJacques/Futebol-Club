@@ -38,4 +38,16 @@ export default class MatchController {
       next(error);
     }
   };
+
+  public editResultMatch = async (req: Request, res: Response, next: NextFunction) => {
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const { id } = req.params;
+    try {
+      await this._service.editResultMatch(Number(id), { homeTeamGoals, awayTeamGoals });
+
+      res.status(200).json({ message: 'Edited' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
