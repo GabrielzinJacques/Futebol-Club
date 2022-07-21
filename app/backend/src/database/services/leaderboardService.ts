@@ -13,4 +13,6 @@ export default class LeaderboardService {
 
     return this.sortLeaderboards(leaderboards);
   };
+
+  
 }
